@@ -4,7 +4,7 @@ import { fetchJobs } from "./features/jobSlice";
 import Filters from "./components/Filters";
 import InfiniteScroll from "react-infinite-scroll-component";
 import JobCard from "./components/JobCard";
-import { Grid } from "@mui/material";
+import { CircularProgress, Grid } from "@mui/material";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -24,11 +24,15 @@ const App = () => {
         dataLength={items.length}
         next={fetchMoreData}
         hasMore={hasMore}
-        loader={<h4>Loading...</h4>}
+        loader={
+          <div style={{ textAlign: "center" }}>
+            <CircularProgress />
+          </div>
+        }
         endMessage={
-          <p style={{ textAlign: "center" }}>
+          <div style={{ textAlign: "center" }}>
             <b>Yay! You have seen it all</b>
-          </p>
+          </div>
         }
       >
         <Grid container spacing={2}>

@@ -6,64 +6,64 @@ import { Grid, TextField } from "@mui/material";
 const Filters = () => {
   const dispatch = useDispatch();
   const handleInputChange = (event) => {
-    dispatch(setFilters({ [event.target.name]: event.target.value || '' }));
+    dispatch(setFilters({ [event.target.name]: event.target.value || "" }));
   };
 
   return (
-    <Grid container spacing={2} style={{ padding: 20 }}>
-      <Grid item xs={12} sm={6} md={3}>
+    <Grid container spacing={1} style={{ padding: 5 }}>
+      <Grid item xs={4} sm={2} md={1}>
         <TextField
-          fullWidth
+          size="small"
           name="companyName"
           label="Company Name"
-          variant="outlined"
+          variant="standard"
           onChange={handleInputChange}
         />
       </Grid>
-      <Grid item xs={12} sm={6} md={3}>
+      <Grid item xs={4} sm={2} md={1}>
         <TextField
-          fullWidth
+          size="small"
           name="location"
           label="Location"
-          variant="outlined"
+          variant="standard"
           onChange={handleInputChange}
         />
       </Grid>
-      <Grid item xs={12} sm={6} md={3}>
+      <Grid item xs={4} sm={2} md={1}>
         <TextField
-          fullWidth
+          size="small"
           name="role"
           label="Role"
-          variant="outlined"
+          variant="standard"
           onChange={handleInputChange}
         />
       </Grid>
-      <Grid item xs={12} sm={6} md={3}>
+      <Grid item xs={4} sm={2} md={1}>
         <TextField
-          fullWidth
+          size="small"
           name="techStack"
           label="Tech Stack"
-          variant="outlined"
+          variant="standard"
           onChange={handleInputChange}
         />
       </Grid>
-      <Grid item xs={12} sm={6} md={3}>
+      <Grid item xs={4} sm={2} md={1}>
         <TextField
-          fullWidth
+          size="small"
           name="minExperience"
           label="Minimum Experience"
           type="number"
-          variant="outlined"
+          variant="standard"
           onChange={handleInputChange}
         />
       </Grid>
-      <Grid item xs={12} sm={6} md={3}>
+      <Grid item xs={4} sm={2} md={1}>
         <TextField
-          fullWidth
+          size="small"
           name="minBasePay"
           label="Minimum Base Pay"
           type="number"
-          variant="outlined"
+          variant="standard"
           onChange={handleInputChange}
         />
       </Grid>

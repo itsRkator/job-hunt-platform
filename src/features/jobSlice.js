@@ -16,7 +16,6 @@ export const fetchJobs = createAsyncThunk(
     const data = await response.json();
     // Ensure data.jdList is always an array
     const jobs = Array.isArray(data.jdList) ? data.jdList : [];
-    console.log("Jobs are here for test --------> ", jobs);
     return jobs;
   }
 );
