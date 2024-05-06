@@ -2,6 +2,8 @@ import {
   Bolt,
   Check,
   HourglassTopSharp,
+  KeyboardArrowDown,
+  KeyboardArrowUp,
 } from "@mui/icons-material";
 import {
   Avatar,
@@ -12,9 +14,25 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 
 const JobCard = ({ job }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [jobDescription, setJobDescription] = useState(
+    job.jobDetailsFromCompany.split(".")[0] + "..."
+  );
+
+  const [daysPosted, setDaysPosted] = useState(Math.floor(Math.random() * 30)); // Set this once
+
+  const handleExpandDescription = () => {
+    setIsExpanded(!isExpanded);
+    if (!isExpanded) {
+      // Change this to !isExpanded
+      setJobDescription(job.jobDetailsFromCompany);
+    } else {
+      setJobDescription(job.jobDetailsFromCompany.split(".")[0] + "...");
+    }
+  };
   return (
     <Card sx={{ m: 0.5, boxShadow: 5, maxWidth: 1000 }}>
       <CardContent>
@@ -22,7 +40,7 @@ const JobCard = ({ job }) => {
           <Grid item xs={12}>
             <Chip
               icon={<HourglassTopSharp style={{ color: "#764f3a" }} />}
-              label={`Posted ${Math.floor(Math.random() * 30)} days ago`}
+              label={`Posted ${daysPosted} days ago`}
               size="small"
               variant="outlined"
               sx={{
@@ -44,10 +62,7 @@ const JobCard = ({ job }) => {
             />
           </Grid>
           <Grid item xs={8}>
-            <Typography
-              color="text.secondary"
-              fontWeight="bold"
-            >
+            <Typography color="text.secondary" fontWeight="bold">
               {job.companyName}
             </Typography>
             <Typography variant="subtitle1" component="div">
@@ -100,29 +115,22 @@ const JobCard = ({ job }) => {
               component="div"
               sx={{ textAlign: "justify" }}
             >
-              {job.jobDetailsFromCompany}
+              {jobDescription}
             </Typography>
-            <Typography
-              component="a"
-              href={job.jdLink}
-              target="blank"
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                textDecoration: "none",
-              }}
-            >
-              View Job
-            </Typography>
+            <Button onClick={handleExpandDescription}>
+              Show {!isExpanded ? "More" : "less"}
+              {!isExpanded ? <KeyboardArrowDown /> : <KeyboardArrowUp />}
+            </Button>
           </Grid>
         </Grid>
         <Grid item xs={12}>
           <Typography sx={{ mt: 1, fontWeight: "medium" }}>
             <Grid item xs={12} color="text.secondary">
-              Minimum Experience:
+              Experience:
             </Grid>
             <Grid item xs={12}>
               {job.minExp || 0} {` Year${job.minExp > 1 ? "s" : ""}`}
+              {job.maxExp && ` - ${job.maxExp} Years`} 
             </Grid>
           </Typography>
         </Grid>
@@ -130,6 +138,9 @@ const JobCard = ({ job }) => {
           <Grid item xs={12}>
             <Button
               variant="contained"
+              component="a"
+              href={job.jdLink}
+              target="blank"
               fullWidth
               size="small"
               style={{
@@ -140,49 +151,6 @@ const JobCard = ({ job }) => {
             >
               <Bolt sx={{ m: 0.75, color: "#fecc44" }} />
               Easy Apply
-            </Button>
-          </Grid>
-          <Grid item xs={12}>
-            <Button
-              style={{ background: "#4943da" }}
-              variant="contained"
-              fullWidth
-              size="small"
-            >
-              <Avatar
-                src={`https://randomuser.me/api/portraits/men/${Math.floor(
-                  Math.random() * 100
-                )}.jpg`}
-                alt={`User Avatar`}
-                sx={{
-                  width: 25,
-                  height: 25,
-                  m: 0.5,
-                  display: "flex",
-                  alignItems: "center",
-                  filter: "blur(1px)",
-                }}
-              />
-              <Avatar
-                src={`https://randomuser.me/api/portraits/men/${Math.floor(
-                  Math.random() * 100
-                )}.jpg`}
-                alt={`User Avatar`}
-                sx={{
-                  width: 25,
-                  height: 25,
-                  m: 0.5,
-                  display: "flex",
-                  alignItems: "center",
-                  filter: "blur(1px)",
-                }}
-              />
-              <Typography
-                variant="contained"
-                sx={{ p: 1, textTransform: "none" }}
-              >
-                Unlock referral asks
-              </Typography>
             </Button>
           </Grid>
         </Grid>

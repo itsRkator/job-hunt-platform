@@ -25,23 +25,24 @@ const App = () => {
         next={fetchMoreData}
         hasMore={hasMore}
         loader={
-          <div style={{ textAlign: "center" }}>
-            <CircularProgress />
-          </div>
+          <CircularProgress style={{ display: "block", margin: "20px auto" }} />
         }
         endMessage={
-          <div style={{ textAlign: "center" }}>
+          <div style={{ textAlign: "center", margin: "20px 0" }}>
             <b>Yay! You have seen it all</b>
           </div>
         }
+        style={{ overflow: "hidden" }} // Set overflow to 'hidden' to prevent double scrollbar
       >
-        <Grid container spacing={2} sx={{m: 2, width: "100vw"}}>
-          {items.map((job, index) => (
-            <Grid item xs={12} sm={8} md={4} key={`${job.jdUid}-${index}`}>
-              <JobCard job={job} />
-            </Grid>
-          ))}
-        </Grid>
+        <div style={{ width: "96.25%" }}>
+          <Grid container spacing={2} sx={{ m: 2 }}>
+            {items.map((job, index) => (
+              <Grid item xs={12} sm={8} md={4} key={`${job.jdUid}-${index}`}>
+                <JobCard job={job} />
+              </Grid>
+            ))}
+          </Grid>
+        </div>
       </InfiniteScroll>
     </div>
   );
