@@ -1,6 +1,5 @@
 import {
   Bolt,
-  BusinessCenterOutlined,
   Check,
   HourglassTopSharp,
 } from "@mui/icons-material";
@@ -17,7 +16,7 @@ import React from "react";
 
 const JobCard = ({ job }) => {
   return (
-    <Card sx={{ m: 2, boxShadow: 3 }}>
+    <Card sx={{ m: 0.5, boxShadow: 5, maxWidth: 1000 }}>
       <CardContent>
         <Grid container spacing={1}>
           <Grid item xs={12}>

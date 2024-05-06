@@ -35,9 +35,9 @@ const App = () => {
           </div>
         }
       >
-        <Grid container spacing={2}>
+        <Grid container spacing={2} sx={{m: 2, width: "100vw"}}>
           {items.map((job, index) => (
-            <Grid item xs={12} sm={6} md={4} key={`${job.jdUid}-${index}`}>
+            <Grid item xs={12} sm={8} md={4} key={`${job.jdUid}-${index}`}>
               <JobCard job={job} />
             </Grid>
           ))}

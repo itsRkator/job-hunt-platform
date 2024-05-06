@@ -1,71 +1,108 @@
+// Filters.js
 import React from "react";
 import { useDispatch } from "react-redux";
 import { setFilters } from "../features/jobSlice";
-import { Grid, TextField } from "@mui/material";
+import {
+  FormControl,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
 
 const Filters = () => {
   const dispatch = useDispatch();
+
   const handleInputChange = (event) => {
     dispatch(setFilters({ [event.target.name]: event.target.value || "" }));
   };
 
   return (
-    <Grid container spacing={1} style={{ padding: 5 }}>
-      <Grid item xs={4} sm={2} md={1}>
-        <TextField
-          size="small"
-          name="companyName"
-          label="Company Name"
-          variant="standard"
-          onChange={handleInputChange}
-        />
-      </Grid>
-      <Grid item xs={4} sm={2} md={1}>
-        <TextField
-          size="small"
-          name="location"
-          label="Location"
-          variant="standard"
-          onChange={handleInputChange}
-        />
-      </Grid>
-      <Grid item xs={4} sm={2} md={1}>
-        <TextField
-          size="small"
-          name="role"
-          label="Role"
-          variant="standard"
-          onChange={handleInputChange}
-        />
-      </Grid>
-      <Grid item xs={4} sm={2} md={1}>
-        <TextField
-          size="small"
-          name="techStack"
-          label="Tech Stack"
-          variant="standard"
-          onChange={handleInputChange}
-        />
-      </Grid>
-      <Grid item xs={4} sm={2} md={1}>
-        <TextField
-          size="small"
-          name="minExperience"
-          label="Minimum Experience"
-          type="number"
-          variant="standard"
-          onChange={handleInputChange}
-        />
-      </Grid>
-      <Grid item xs={4} sm={2} md={1}>
-        <TextField
-          size="small"
-          name="minBasePay"
-          label="Minimum Base Pay"
-          type="number"
-          variant="standard"
-          onChange={handleInputChange}
-        />
+    <Grid container spacing={1} style={{ padding: 20 }}>
+      <Grid item xs={12}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "flex-start",
+          }}
+        >
+          <FormControl sx={{ m: 1, minWidth: 150 }} size="small">
+            <InputLabel>Roles</InputLabel>
+            <Select label="Roles" name="jobRole" onChange={handleInputChange}>
+              <MenuItem selected value="frontend">
+                Frontend
+              </MenuItem>
+              <MenuItem value="ios">IOS</MenuItem>
+              <MenuItem value="android">Android</MenuItem>
+              <MenuItem value="tech lead">Tech Lead</MenuItem>
+            </Select>
+          </FormControl>
+          <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+            <InputLabel>Number of Employees</InputLabel>
+            <Select
+              label="Number of Employees"
+              name="empCount"
+              onChange={handleInputChange}
+            >
+              <MenuItem value={50}>50</MenuItem>
+              <MenuItem value={100}>100</MenuItem>
+              <MenuItem value={500}>500</MenuItem>
+              <MenuItem selected value={1000}>
+                1000
+              </MenuItem>
+            </Select>
+          </FormControl>
+          <FormControl sx={{ m: 1, minWidth: 140 }} size="small">
+            <InputLabel>Experience</InputLabel>
+            <Select
+              label="Experience"
+              name="experience"
+              onChange={handleInputChange}
+            >
+              <MenuItem value={1}>1 Year</MenuItem>
+              <MenuItem value={2}>2 Years</MenuItem>
+              <MenuItem value={3}>3 Years</MenuItem>
+              <MenuItem value={4}>4 Years</MenuItem>
+              <MenuItem value={5}>5 Years</MenuItem>
+            </Select>
+          </FormControl>
+          <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+            <InputLabel>Job Type</InputLabel>
+            <Select
+              label="Job Type"
+              name="jobType"
+              onChange={handleInputChange}
+            >
+              <MenuItem value="Hybrid">Hybrid</MenuItem>
+              <MenuItem value="on-site">On-Site</MenuItem>
+              <MenuItem value="remote">Remote</MenuItem>
+            </Select>
+          </FormControl>
+          <FormControl sx={{ m: 1, minWidth: 235 }} size="small">
+            <InputLabel>Minimum Base Pay Salary</InputLabel>
+            <Select
+              label="Minimum Base Pay Salary"
+              name="minJdSalary"
+              onChange={handleInputChange}
+            >
+              <MenuItem value={10}>10 LPA</MenuItem>
+              <MenuItem value={20}>20 LPA</MenuItem>
+              <MenuItem value={30}>30 LPA</MenuItem>
+              <MenuItem value={50}>50 LPA</MenuItem>
+              <MenuItem value={70}>70 LPA</MenuItem>
+            </Select>
+          </FormControl>
+          <TextField
+            size="small"
+            name="companyName"
+            label="Search Company"
+            variant="outlined"
+            onChange={handleInputChange}
+          />
+        </div>
       </Grid>
     </Grid>
   );
