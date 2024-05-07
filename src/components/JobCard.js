@@ -2,11 +2,10 @@ import {
   Bolt,
   Check,
   HourglassTopSharp,
-  KeyboardArrowDown,
-  KeyboardArrowUp,
 } from "@mui/icons-material";
 import {
   Avatar,
+  Backdrop,
   Button,
   Card,
   CardContent,
@@ -21,26 +20,35 @@ const JobCard = ({ job }) => {
   const [jobDescription, setJobDescription] = useState(
     job.jobDetailsFromCompany.split(".")[0] + "..."
   );
+  const [backdropOpen, setBackdropOpen] = useState(false);
 
-  const [daysPosted, setDaysPosted] = useState(Math.floor(Math.random() * 30)); // Set this once
+  const [daysPosted, setDaysPosted] = useState(Math.floor(Math.random() * 30));
 
   const handleExpandDescription = () => {
     setIsExpanded(!isExpanded);
     if (!isExpanded) {
-      // Change this to !isExpanded
       setJobDescription(job.jobDetailsFromCompany);
     } else {
       setJobDescription(job.jobDetailsFromCompany.split(".")[0] + "...");
     }
   };
+
+  const handleBackdropClose = () => {
+    setBackdropOpen(false);
+  };
+
+  const handleShowBackdrop = () => {
+    setBackdropOpen(true);
+  };
+
   return (
-    <Card sx={{ m: 0.5, boxShadow: 5, maxWidth: 1000 }}>
+    <Card sx={{ m: 2, boxShadow: 3 }}>
       <CardContent>
         <Grid container spacing={1}>
           <Grid item xs={12}>
             <Chip
               icon={<HourglassTopSharp style={{ color: "#764f3a" }} />}
-              label={`Posted ${daysPosted} days ago`}
+              label={`Posted ${Math.floor(Math.random() * 30)} days ago`}
               size="small"
               variant="outlined"
               sx={{
@@ -75,7 +83,7 @@ const JobCard = ({ job }) => {
         </Grid>
         <Grid item xs={12}>
           <Typography
-            variant="subtitle2"
+            variant="subtitle"
             component="div"
             sx={{
               display: "flex",
@@ -117,30 +125,43 @@ const JobCard = ({ job }) => {
             >
               {jobDescription}
             </Typography>
-            <Button onClick={handleExpandDescription}>
-              Show {!isExpanded ? "More" : "less"}
-              {!isExpanded ? <KeyboardArrowDown /> : <KeyboardArrowUp />}
-            </Button>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography
+              variant="body1"
+              component="a"
+              href="#"
+              sx={{
+                textDecoration: "none",
+                textAlign: "center",
+                display: "flex",
+                justifyContent: "center",
+              }}
+              onClick={handleShowBackdrop}
+            >
+              View job
+            </Typography>
           </Grid>
         </Grid>
         <Grid item xs={12}>
-          <Typography sx={{ mt: 1, fontWeight: "medium" }}>
-            <Grid item xs={12} color="text.secondary">
+          <Typography component="div" sx={{ mt: 1, fontWeight: "medium" }}>
+            <Typography
+              variant="subtitle2"
+              component="div"
+              color="text.secondary"
+            >
               Experience:
-            </Grid>
-            <Grid item xs={12}>
+            </Typography>
+            <Typography variant="body2" component="div">
               {job.minExp || 0} {` Year${job.minExp > 1 ? "s" : ""}`}
-              {job.maxExp && ` - ${job.maxExp} Years`} 
-            </Grid>
+              {job.maxExp && ` - ${job.maxExp} Years`}
+            </Typography>
           </Typography>
         </Grid>
         <Grid container spacing={1} sx={{ mt: 2 }}>
           <Grid item xs={12}>
             <Button
               variant="contained"
-              component="a"
-              href={job.jdLink}
-              target="blank"
               fullWidth
               size="small"
               style={{
@@ -153,8 +174,71 @@ const JobCard = ({ job }) => {
               Easy Apply
             </Button>
           </Grid>
+          <Grid item xs={12}>
+            <Button
+              style={{ background: "#4943da" }}
+              variant="contained"
+              fullWidth
+              size="small"
+            >
+              <Avatar
+                src={`https://randomuser.me/api/portraits/men/${Math.floor(
+                  Math.random() * 100
+                )}.jpg`}
+                alt={`User Avatar`}
+                sx={{
+                  width: 25,
+                  height: 25,
+                  m: 0.5,
+                  display: "flex",
+                  alignItems: "center",
+                  filter: "blur(1px)",
+                }}
+              />
+              <Avatar
+                src={`https://randomuser.me/api/portraits/men/${Math.floor(
+                  Math.random() * 100
+                )}.jpg`}
+                alt={`User Avatar`}
+                sx={{
+                  width: 25,
+                  height: 25,
+                  m: 0.5,
+                  display: "flex",
+                  alignItems: "center",
+                  filter: "blur(1px)",
+                }}
+              />
+              <Typography
+                variant="contained"
+                sx={{ p: 1, textTransform: "none" }}
+              >
+                Unlock referral asks
+              </Typography>
+            </Button>
+          </Grid>
         </Grid>
       </CardContent>
+      <Backdrop
+        sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={backdropOpen}
+        onClick={handleBackdropClose}
+      >
+        <Typography
+          color="text.secondary"
+          component="div"
+          variant="body1"
+          sx={{
+            height: 400,
+            width: 400,
+            background: "#FFF",
+            p: 3,
+            borderRadius: 4,
+          }}
+        >
+          {job.jobDetailsFromCompany}
+        </Typography>
+      </Backdrop>
     </Card>
   );
 };

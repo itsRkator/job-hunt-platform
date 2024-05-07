@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { filterJobs } from "../utils/jobUtils";
 
 export const fetchJobs = createAsyncThunk(
   "jobs/fetchJobs",
@@ -11,7 +12,6 @@ export const fetchJobs = createAsyncThunk(
     const requestBody = {
       limit,
       offset,
-      ...filters,
     };
 
     const requestOptions = {
@@ -31,8 +31,9 @@ export const fetchJobs = createAsyncThunk(
       }
 
       const data = await response.json();
-      const jobs = Array.isArray(data.jdList) ? data.jdList : [];
-      console.log(jobs[0]);
+
+      let jobs = await filterJobs(data.jdList, filters);
+      jobs = Array.isArray(jobs) ? jobs : [];
       return jobs;
     } catch (error) {
       console.error("Error fetching jobs:", error);

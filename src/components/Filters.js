@@ -31,10 +31,14 @@ const Filters = () => {
         >
           <FormControl sx={{ m: 1, minWidth: 150 }} size="small">
             <InputLabel>Roles</InputLabel>
-            <Select label="Roles" name="jobRole" onChange={handleInputChange}>
-              <MenuItem selected value="frontend">
-                Frontend
-              </MenuItem>
+            <Select
+              label="Roles"
+              name="jobRole"
+              onChange={handleInputChange}
+              value={""}
+            >
+              <MenuItem value="">None</MenuItem>
+              <MenuItem value="frontend">Frontend</MenuItem>
               <MenuItem value="ios">IOS</MenuItem>
               <MenuItem value="android">Android</MenuItem>
               <MenuItem value="tech lead">Tech Lead</MenuItem>
@@ -46,13 +50,12 @@ const Filters = () => {
               label="Number of Employees"
               name="empCount"
               onChange={handleInputChange}
+              value={""}
             >
+              <MenuItem value="">None</MenuItem>
               <MenuItem value={50}>50</MenuItem>
               <MenuItem value={100}>100</MenuItem>
               <MenuItem value={500}>500</MenuItem>
-              <MenuItem selected value={1000}>
-                1000
-              </MenuItem>
             </Select>
           </FormControl>
           <FormControl sx={{ m: 1, minWidth: 140 }} size="small">
@@ -61,12 +64,12 @@ const Filters = () => {
               label="Experience"
               name="experience"
               onChange={handleInputChange}
+              value={""}
             >
+              <MenuItem value="">None</MenuItem>
               <MenuItem value={1}>1 Year</MenuItem>
               <MenuItem value={2}>2 Years</MenuItem>
               <MenuItem value={3}>3 Years</MenuItem>
-              <MenuItem value={4}>4 Years</MenuItem>
-              <MenuItem value={5}>5 Years</MenuItem>
             </Select>
           </FormControl>
           <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
@@ -75,7 +78,9 @@ const Filters = () => {
               label="Job Type"
               name="jobType"
               onChange={handleInputChange}
+              value={""}
             >
+              <MenuItem value="">None</MenuItem>
               <MenuItem value="Hybrid">Hybrid</MenuItem>
               <MenuItem value="on-site">On-Site</MenuItem>
               <MenuItem value="remote">Remote</MenuItem>
@@ -87,12 +92,13 @@ const Filters = () => {
               label="Minimum Base Pay Salary"
               name="minJdSalary"
               onChange={handleInputChange}
+              value={""}
             >
+              <MenuItem value="">None</MenuItem>
               <MenuItem value={10}>10 LPA</MenuItem>
               <MenuItem value={20}>20 LPA</MenuItem>
               <MenuItem value={30}>30 LPA</MenuItem>
               <MenuItem value={50}>50 LPA</MenuItem>
-              <MenuItem value={70}>70 LPA</MenuItem>
             </Select>
           </FormControl>
           <TextField
@@ -101,6 +107,7 @@ const Filters = () => {
             label="Search Company"
             variant="outlined"
             onChange={handleInputChange}
+            value=""
           />
         </div>
       </Grid>
