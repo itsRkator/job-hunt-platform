@@ -7,6 +7,10 @@ body {
   width: 100vw;
 }
 
+* {
+  font-family: '__LexendFont_7838d2', '__LexendFont_Fallback_7838d2'
+}
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',

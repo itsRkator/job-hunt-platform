@@ -16,22 +16,12 @@ import {
 import React, { useState } from "react";
 
 const JobCard = ({ job }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
   const [jobDescription, setJobDescription] = useState(
     job.jobDetailsFromCompany.split(".")[0] + "..."
   );
   const [backdropOpen, setBackdropOpen] = useState(false);
 
   const [daysPosted, setDaysPosted] = useState(Math.floor(Math.random() * 30));
-
-  const handleExpandDescription = () => {
-    setIsExpanded(!isExpanded);
-    if (!isExpanded) {
-      setJobDescription(job.jobDetailsFromCompany);
-    } else {
-      setJobDescription(job.jobDetailsFromCompany.split(".")[0] + "...");
-    }
-  };
 
   const handleBackdropClose = () => {
     setBackdropOpen(false);
@@ -48,7 +38,7 @@ const JobCard = ({ job }) => {
           <Grid item xs={12}>
             <Chip
               icon={<HourglassTopSharp style={{ color: "#764f3a" }} />}
-              label={`Posted ${Math.floor(Math.random() * 30)} days ago`}
+              label={`Posted ${daysPosted} days ago`}
               size="small"
               variant="outlined"
               sx={{

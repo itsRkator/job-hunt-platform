@@ -102,10 +102,10 @@ const Drawer = styled(MuiDrawer, {
 
 const MiniDrawer = () => {
   const dispatch = useDispatch();
-
   const [drawerWidth, setDrawerWidth] = useState(initialDrawerWidth);
   const [open, setOpen] = useState(false);
   const { items, hasMore } = useSelector((state) => state.jobs);
+  // const {filteredJobs, setFilteredJobs} = useState(items || []);
 
   useEffect(() => {
     dispatch(fetchJobs());
@@ -173,11 +173,8 @@ const MiniDrawer = () => {
               />
             )}
           </IconButton>
-          <Typography
-            component="Button"
+          <IconButton
             onClick={handleDrawer}
-            color="inherit"
-            aria-label="open drawer"
             sx={{
               display: "flex",
               justifyContent: "center",
@@ -191,10 +188,13 @@ const MiniDrawer = () => {
               background: "rgb(255, 255, 255)",
               border: "2px solid rgb(233, 235, 235)",
               zIndex: 9999,
+              "&:hover": {
+                background: "rgb(255, 255, 255)", // Ensure the background color remains unchanged
+              },
             }}
           >
             {!open ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
-          </Typography>
+          </IconButton>
         </DrawerHeader>
         <Divider />
         <Typography
@@ -273,6 +273,39 @@ const MiniDrawer = () => {
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
         <Typography component="div">
+          <Typography component="div">
+            <Typography component="div"></Typography>
+            <Typography
+              component="div"
+              sx={{
+                maxWidth: "90%",
+                width: "auto",
+                pl: 2,
+                pt: 1,
+                pr: 2,
+                pb: 1,
+                m: 2,
+                background: "rgb(217, 254, 211)",
+                boxShadow: "rgba(0, 0, 0, 0.25) 0px 4px 4px 0px",
+                borderRadius: "20px",
+              }}
+            >
+              We, at Weekday, are creating a go-to hub for uncovering the real
+              issues candidates should be aware of before joining a company.{" "}
+              <Typography
+                component="a"
+                href="https://www.weekday.works/companies-work-culture-database"
+                target="blank"
+                color="text.primary"
+                fontWeight="bold"
+              >
+                Access 150+ company reviews here
+              </Typography>
+            </Typography>
+          </Typography>
+          <Typography component="div" sx={{ margin: "auto", width: "7rem", textAlign: "center", borderBottom: "1px solid #3522e2" }}>
+            Search jobs
+          </Typography>
           <Filters />
           <InfiniteScroll
             dataLength={items.length}
@@ -284,8 +317,15 @@ const MiniDrawer = () => {
               />
             }
             endMessage={
-              <div style={{ textAlign: "center", margin: "20px 0" }}>
-                <b>Yay! You have seen it all</b>
+              <div style={{ textAlign: "center", margin: "3rem", padding: "3rem" }}>
+                <img
+                  alt="No Result"
+                  height={150}
+                  src="https://jobs.weekday.works/_next/static/media/nothing-found.4d8f334c.png"
+                />
+                <Typography component="div" fontWeight="bold" sx={{p: 4}}>
+                  No Jobs available for this category at the moment
+                </Typography>
               </div>
             }
             style={{ overflow: "hidden" }} // Set overflow to 'hidden' to prevent double scrollbar
